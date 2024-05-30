@@ -7,11 +7,16 @@
 </head>
 <body>
     <h2>Buy Product</h2>
-    <div>
-        <img src="{{ url_for('static', filename='img/' + post['image_filename']) }}" alt="Product Image">
-        <p>{{ post['description'] }}</p>
-        <p>Date Posted: {{ post['datetime'].strftime('%Y-%m-%d %H:%M:%S') }}</p>
-    </div>
-    <button>Buy Now</button>
+    <form action="#" method="post">
+        <div>
+            <p>{{post.user_email}}</p>
+            <img src="../static/uploads/{{post.unique_name}}" alt="" height="100" width="100">
+            <h3>{{post.post_name}}</h3>
+            <p>{{post.post_price}}</p>
+            <p>{{post.post_description}}</p>
+            
+        </div>
+        <button>Buy Now</button>
+    </form>
 </body>
 </html>

@@ -226,6 +226,7 @@ def dashboard():
         # print(user)
         if user:
             dashboard_data.append({
+                '_id' : post['_id'],
                 'owner_email': user['email'],
                 'owner_photo': user['file_url'],
                 'product_image': post['unique_name'],
@@ -265,13 +266,22 @@ def pypost():
 
 
 
-@app.route('/delete<sno>', methods= ['GET','POST'])
+@app.route('/delete/<sno>', methods= ['GET','POST'])
 def delete(sno):
     if 'user' in session:
+        print(sno)
         mongo.db.images.delete_one({'_id': ObjectId(sno)})
-    return render_template('pypost.html')
+    return redirect(url_for('pypost'))
     
     
+
+@app.route('/buy/<sno>')
+def buy(sno):
+    print(sno)
+    post = mongo.db.images.find_one({'_id': ObjectId(sno)})
+    # if request.form == 'POST:
+    print(post)  
+    return render_template('buy.html',post = post)
 
     
 
@@ -424,3 +434,4 @@ def logout():
 
 if __name__ == "__main__":
     app.run(debug=True)
+    # app.run(debug=True, host='192.168.1.3')

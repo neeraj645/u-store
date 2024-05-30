@@ -146,6 +146,7 @@
                 <!-- Product image -->
                 
                 <!-- <img src="{{post.product_image}}" alt=""> -->
+                <p>{{post._id}}</p>
                 <img src="../static/uploads/{{post.product_image}}" alt="">
                 <h3>{{post.product_name}}</h3>
                 <p>{{post.product_description}}</p>
@@ -153,7 +154,7 @@
                 <!-- Buttons -->
                 <div class="buttons">
                   
-                        <button>Buy</button>
+                    <a href="/buy/{{post._id}}"><button type="button" >My Posts</button></a>
                     </a>
                     <button>Share Link</button>
                 </div>
