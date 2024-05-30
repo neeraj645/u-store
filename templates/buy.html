@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buy Product</title>
+</head>
+<body>
+    <h2>Buy Product</h2>
+    <div>
+        <img src="{{ url_for('static', filename='img/' + post['image_filename']) }}" alt="Product Image">
+        <p>{{ post['description'] }}</p>
+        <p>Date Posted: {{ post['datetime'].strftime('%Y-%m-%d %H:%M:%S') }}</p>
+    </div>
+    <button>Buy Now</button>
+</body>
+</html>

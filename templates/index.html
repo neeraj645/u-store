@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <style>
+        /* CSS for Navigation Bar */
+        body{
+            padding: 0;
+            margin: 0;
+            background-color: antiquewhite;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+        nav {
+            background-color: #333;
+            padding: 20px 10px;
+            position: fixed;
+            width: 100%;
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 18px;
+        }
+
+        /* CSS for Hero Section */
+        .hero {
+            padding: 15vh 20px;
+            /* background-color: #f2f2f2; */
+        }
+
+        /* CSS for Feed */
+        .feed {
+            display: flex;
+            flex-direction: column;
+  
+            align-items: center;
+            justify-content: space-around;
+        }
+
+        /* CSS for Posts */
+        .post {
+            width: 300px;
+            margin-bottom: 50px;
+            background-color: #8f8f8f;
+            border: 1px solid #676767;
+            padding: 10px;
+            overflow: hidden; /* Clear the float */
+        }
+
+        .post img {
+            width: 100%;
+            height: auto;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+
+        .post img.seller-profile {
+            width: 40px; /* Adjust the size of the profile image */
+            height: 40px;
+            background-color: #ffffff;
+            border-radius: 50%; /* Make the profile image round */
+            float: left; /* Float the image to the left */
+            margin-right: 10px; /* Add some space to the right of the image */
+        }
+
+        .post .seller-info p {
+            margin: 0; /* Remove default margin */
+            padding-top: 10px; /* Add some space between the image and the name */
+            font-weight: bold;
+            /* color: #4CAF50; Make the seller's name bold */
+        }
+
+        .post .seller-info {
+            overflow: hidden; /* Clear the float */
+        }
+
+        .post .seller-info p {
+            margin-left: 40px; /* Adjust to match the width of the profile image + margin */
+        }
+
+        /* CSS for Buttons */
+        .buttons button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+
+        .buttons button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/sell">Sell</a></li>
+            <li><a href="/profile">Profile</a></li>
+            {% if actual_user %}
+            <li><a href="/logout">({{user_data1.fullname}})Logout</a></li>
+        {% else %}
+            <li><a href="/login">Login</a></li>
+        {% endif %}
+        </ul>
+    </nav>
+
+
+    <!-- sorting  -->
+
+    <!-- Hero Section with Feed -->
+    <section class="hero">
+        
+        <div class="feed">
+            <!-- <p>{{dict.file_url}}</p> -->
+            <!-- <img src="../static/{{dict.file_url}}" alt=""> -->
+            <!-- Iterate over posts -->
+            {% for post in posts %}
+       
+            <div class="post">
+                <!-- Seller's profile image and name -->
+                <div class="seller-info">
+                    
+                    <!-- <img class="seller-profile" src="{{post.owner_photo}}" alt="Seller Profile Image"> -->
+                    <img src="../static/{{post.owner_photo}}" class="seller-profile" alt="Seller Profile Image">
+                    <p>{{post.owner_email}}</p>
+               
+                </div>
+                <!-- Product image -->
+                
+                <!-- <img src="{{post.product_image}}" alt=""> -->
+                <img src="../static/uploads/{{post.product_image}}" alt="">
+                <h3>{{post.product_name}}</h3>
+                <p>{{post.product_description}}</p>
+                <h3>&#8377;{{post.product_price}}</h3>
+                <!-- Buttons -->
+                <div class="buttons">
+                  
+                        <button>Buy</button>
+                    </a>
+                    <button>Share Link</button>
+                </div>
+            </div>
+            {% endfor %}
+
+
+         
+        </div>
+    </section>
+</body>
+</html>

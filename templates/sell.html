@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sell Product</title>
+    <style>
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body Styling */
+        body {
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            /* font-family: Verdana, Geneva, Tahoma, sans-serif; */
+            background-color: antiquewhite;
+            color: #000000;
+            
+            min-height: 100vh;
+            padding-top: 80px; /* Offset for fixed navbar */
+        }
+
+        /* Navigation Bar Styling */
+        nav {
+            background-color: #333;
+            padding: 20px 10px;
+            position: fixed;
+            top: 0;
+            display: flex;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 18px;
+        }
+
+        /* Form Container Styling */
+        form {
+            background: #ffffff;
+            padding: 25px;
+            border-radius: 5px;
+            border: 1px solid rgb(189, 189, 189);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+            /* animation: fadeInScale 1s ease-in-out; */
+        }
+
+        /* Form Elements Styling */
+        form div {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            /* font-weight: bold; */
+            color: #000000;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccd;
+            border-radius: 4px;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus,
+        input[type="number"]:focus,
+        textarea:focus {
+            border-color: #bcaa79;
+            outline: none;
+            box-shadow: 0 0 5px #b5a579;
+        }
+
+        input[type="file"] {
+            padding: 10px 0;
+        }
+
+        button {
+            background-color: rgb(202, 182, 156);
+            /* color: white; */
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+            width: 100%;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: rgb(234, 216, 194);
+            transform: translateY(-2px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            form {
+                width: 90%;
+                padding: 20px;
+            }
+
+            input[type="text"],
+            input[type="number"],
+            textarea {
+                padding: 10px;
+            }
+
+            button {
+                padding: 14px;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Success Message Styling */
+        h5 {
+            color: green;
+            margin-top: 15px;
+            animation: slideIn 0.7s ease-in-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .sell-hero{
+            /* height: 100vh; */
+            /* width: 100vw; */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/sell">Sell</a></li>
+            <li><a href="/profile">Profile</a></li>
+            <a href="#"> </a>
+            
+            <li><a href="/logout">({{fullname.fullname}})Logout</a></li>
+  
+        </ul>
+    </nav>
+    <div class="sell-hero">
+    <form action="{{ url_for('sell') }}" method="post" enctype="multipart/form-data">
+        <div>
+            <label for="name">Product Name:</label>
+            <input type="text" id="name" name="product_name" required>
+        </div>
+        <div>
+            <label for="price">Price:</label>
+            <input type="number" id="price" name="price" required>
+        </div>
+        <div>
+            <label for="description">Description:</label><br>
+            <textarea id="description" name="description" rows="4" cols="50" required></textarea>
+        </div>
+        <div>
+            <label for="file">Upload Image:</label>
+            <input type="file" id="file" name="file" accept="image/*" required>
+        </div>
+        <h5>{{ message }}</h5>
+        <button type="submit">Upload Product</button>
+    </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+            font-size: 14px;
+            align-items: center;
+            text-align: center;
+            display: flex;
+            background-color: antiquewhite;
+            flex-direction: column;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+        h2 {
+            text-align: center;
+            font-size: 30px;
+        }
+        a {
+            text-decoration: none;
+        }
+        .form-class {
+            background-color: rgb(255, 255, 255);
+            min-height: 50vh;
+            width: 50vw;
+            border-radius: 5px;
+            border: 1px solid rgb(189, 189, 189);
+            max-width: 51vw; 
+            padding: 50px;
+        }
+        input:focus {
+            font-size: 15px;
+            border: 1px solid rgb(145, 145, 145);
+            box-shadow: 0px 0px 2px rgb(87, 87, 87);
+        }
+        input, select {
+            height: 5vh;
+            width: 100%;
+            outline: none;
+            transition: all ease 0.2s;
+            padding: 5px 10px;
+            margin: 1vh 0 4vh 0;
+            border-radius: 5px;
+            border: 1px solid rgb(196, 196, 196);
+        }
+        .other-links {
+            text-align: left;
+        }
+        button {
+            margin-top: 10px;
+            width: 20%;
+            height: 40px;
+            border: 1px solid rgb(189, 189, 189);
+            border-radius: 3px;
+            cursor: pointer;
+            background-color: antiquewhite;
+        }
+        .all-elements {
+            text-align: start;
+        }
+        .checkbox-wrapper-2 {
+            display: flex; gap: 5px;
+            padding-bottom: 10px;
+        }
+        .checkbox-wrapper-2 .ikxBAC {
+            appearance: none;
+            background-color: #dfe1e4;
+            border-radius: 72px;
+            border-style: none;
+            flex-shrink: 0;
+            height: 20px;
+            margin: 0;
+            position: relative;
+            width: 30px;
+        }
+        .checkbox-wrapper-2 .ikxBAC::before {
+            bottom: -6px;
+            content: "";
+            left: -6px;
+            position: absolute;
+            right: -6px;
+            top: -6px;
+        }
+        .checkbox-wrapper-2 .ikxBAC,
+        .checkbox-wrapper-2 .ikxBAC::after {
+            transition: all 100ms ease-out;
+        }
+        .checkbox-wrapper-2 .ikxBAC::after {
+            background-color: #fff;
+            border-radius: 50%;
+            content: "";
+            height: 14px;
+            left: 3px;
+            position: absolute;
+            top: 3px;
+            width: 14px;
+        }
+        .checkbox-wrapper-2 input[type=checkbox] {
+            cursor: default;
+        }
+        .checkbox-wrapper-2 .ikxBAC:hover {
+            background-color: #c9cbcd;
+            transition-duration: 0s;
+        }
+        .checkbox-wrapper-2 .ikxBAC:checked {
+            background-color: #6e79d6;
+        }
+        .checkbox-wrapper-2 .ikxBAC:checked::after {
+            background-color: #fff;
+            left: 13px;
+        }
+        .checkbox-wrapper-2 :focus:not(.focus-visible) {
+            outline: 0;
+        }
+        .checkbox-wrapper-2 .ikxBAC:checked:hover {
+            background-color: #535db3;
+        }
+        #country_code option {
+            padding: 50px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Register</h2>
+    <form action="/register" class="form-class" method="post" onsubmit="return validateForm()">
+        <div class="all-elements">
+            <div>
+                <label for="fullname">Full Name:</label>
+                <input type="text" id="fullname" name="fullname" required>
+            </div>
+            <div>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div>
+                <label for="rollno">Roll Number:</label>
+                <input type="text" id="rollno" name="rollno" required oninput="parseRollNumber()">
+            </div>
+            <div class="checkbox-wrapper-2">
+                <label for="checkbox">Edit Details </label>
+                <input type="checkbox" id="editInfo" onchange="toggleEditableFields()" class="sc-gJwTLC ikxBAC">
+            </div>
+            <div>
+                <label for="course">Course:</label>
+                <input type="text" id="course" name="course" >
+            </div>
+            <div>
+                <label for="branch">Branch:</label>
+                <input type="text" id="branch" name="branch" >
+            </div>
+            <div>
+                <label for="passout_year">Passout Year:</label>
+                <input type="text" id="passout_year" name="passout_year" >
+            </div>
+            <div>
+                <label for="phone">Phone Number:</label>
+                <input type="tel" id="phone" name="phone" required pattern="[0-9]{10,15}">
+                <span id="phoneError" style="color: red;"></span>
+            </div>
+            <div>
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+                <span id="passwordError" style="color: red;"></span>
+            </div>
+            <div>
+                <label for="reenter_password">Re-enter Password:</label>
+                <input type="password" id="reenter_password" name="reenter_password" required>
+                <span id="reenterPasswordError" style="color: red;"></span>
+            </div>
+        </div>
+        <button type="submit">Register</button>
+    </form>
+    <p>Already have an account? <a href="{{ url_for('login') }}">Login here</a></p>
+
+    <!-- <script>
+        function parseRollNumber() {
+            const rollno = document.getElementById('rollno').value;
+            if (rollno.length >= 10) {
+                const courseCodes = {
+                    'BET': 'B.Tech',
+                    'MET': 'M.Tech'
+                };
+                const branchCodes = {
+                    'CS': 'Computer Science',
+                    'EC': 'Electronics'
+                };
+
+                const course = courseCodes[rollno.substring(0, 3)] || 'Unknown';
+                const branch = branchCodes[rollno.substring(5, 7)] || 'Unknown';
+                const passoutYear = '20' + rollno.substring(7, 9);
+
+                document.getElementById('course').value = course;
+                document.getElementById('branch').value = branch;
+                document.getElementById('passout_year').value = passoutYear;
+            }
+        }
+
+        function toggleEditableFields() {
+            const editCheckbox = document.getElementById('editInfo');
+            const fieldsToEdit = ['course', 'branch', 'passout_year'];
+
+            fieldsToEdit.forEach(field => {
+                const inputField = document.getElementById(field);
+                inputField.readOnly = !editCheckbox.checked;
+            });
+        }
+
+        function validateForm() {
+            const password = document.getElementById('password').value;
+            const reenterPassword = document.getElementById('reenter_password').value;
+            const phone = document.getElementById('phone').value;
+
+            // Validate phone number length
+            if (!/^\d{10,15}$/.test(phone)) {
+                document.getElementById('phoneError').textContent = "Phone number must be 10 to 15 digits long and contain only numbers.";
+                return false;
+            } else {
+                document.getElementById('phoneError').textContent = "";
+            }
+
+            const errors = [];
+
+            if (password.length < 8 || password.length > 20) {
+                errors.push("Password must be 8 to 20 characters long.");
+            }
+            if (!/[a-z]/.test(password)) {
+                errors.push("Password must contain at least one lowercase letter.");
+            }
+            if (!/[A-Z]/.test(password)) {
+                errors.push("Password must contain at least one uppercase letter.");
+            }
+            if (!/\d/.test(password)) {
+                errors.push("Password must contain at least one digit.");
+            }
+            if (!/[@$!%*?&]/.test(password)) {
+                errors.push("Password must contain at least one special character.");
+            }
+            if (password !== reenterPassword) {
+                errors.push("Passwords do not match.");
+            }
+
+            if (errors.length > 0) {
+                document.getElementById('passwordError').textContent = errors.join(' ');
+                return false;
+            } else {
+                document.getElementById('passwordError').textContent = "";
+                return true;
+            }
+        }
+    </script> -->
+</body>
+</html>

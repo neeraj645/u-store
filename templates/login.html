@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        body{
+            padding: 0;
+            margin: 0;
+            font-size: 14px;
+            align-items: center;
+            text-align: center;
+            display: flex;
+            background-color: antiquewhite;
+            flex-direction: column;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+
+        h2{
+            text-align: center;
+            font-size: 30px;
+        }
+
+        a{
+            text-decoration: none;
+        }
+        .form-class{
+            background-color: rgb(255, 255, 255);
+            /* display: flex; */
+            height: 50vh;
+            /* width: 50vw; */
+            border-radius: 5px;
+            border: 1px solid rgb(189, 189, 189);
+            max-width:  51vw; 
+            padding: 50px;
+            /* flex-direction: column; */
+            
+
+        }
+
+        input[type="email"],input[type="password"]  {
+            padding: 5px 10px;
+            /* transition: all ease 1s; */
+        }
+
+        input:focus{
+            /* transition: all ease 1s; */
+            font-size: 15px;
+            border: 1px solid rgb(145, 145, 145);
+            box-shadow: 0px 0px 2px rgb(87, 87, 87);
+        }
+        input{
+            height: 5vh;
+            width: 30vw;
+            outline: none;
+            transition: all ease 0.2s;
+            /* color: aqua; */
+            margin-top: 4vh;
+            border-radius: 5px;
+            border: 1px solid rgb(196, 196, 196);
+         
+        }
+
+        .other-links{
+            text-align: left;
+        }
+
+
+        button{
+            margin-top: 10px;
+            width: 90px;
+            height: 40px;
+            border: 1px solid rgb(189, 189, 189);
+            border-radius: 3px;
+            cursor: pointer;
+            background-color: antiquewhite
+        }
+    </style>
+</head>
+<body>
+    <h2>Login</h2>
+    <form action="/login" class="form-class" method="post">
+        <div>
+           
+            <input type="email" id="email" placeholder="Enter Email" name="email" required>
+        </div>
+        <div>
+           
+            <input type="password" placeholder="Enter Password" id="password" name="password" required>
+        </div>
+        
+        <div class="other-links">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <ul>
+                {% for category, message in messages %}
+                    <li class="{{ category }}" style="background-color: rgba(255, 0, 0, 0.299); display: inline;">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+        <p><a href="forget.html">Forgot Password?</a></p>
+        <p>Don't have an account? <a href="{{ url_for('register') }}">Register here</a></p>
+        </div>
+        <button type="submit">Login</button>
+    </form>
+   
+</body>
+</html>

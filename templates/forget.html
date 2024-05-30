@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forgot Password</title>
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+            font-size: 14px;
+            align-items: center;
+            text-align: center;
+            display: flex;
+            background-color: antiquewhite;
+            flex-direction: column;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            height: 100vh;
+            justify-content: center;
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 30px;
+            margin-bottom: 20px;
+        }
+
+        a {
+            text-decoration: none;
+            color: #007bff;
+        }
+
+        .form-class {
+            background-color: rgb(255, 255, 255);
+            height: auto;
+            border-radius: 10px;
+            border: 1px solid rgb(189, 189, 189);
+            max-width: 90vw; 
+            padding: 40px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .form-class:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        input[type="email"] {
+            padding: 10px;
+            font-size: 16px;
+            width: calc(100% - 24px);
+            outline: none;
+            margin-top: 20px;
+            border-radius: 5px;
+            border: 1px solid rgb(196, 196, 196);
+            box-sizing: border-box;
+            transition: all ease 0.2s;
+        }
+
+        input[type="email"]:focus {
+            border: 1px solid rgb(145, 145, 145);
+            box-shadow: 0px 0px 4px rgb(87, 87, 87);
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            border: 1px solid rgb(189, 189, 189);
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: antiquewhite;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        button:hover {
+            background-color: #007bff;
+            color: #fff;
+            transform: scale(1.05);
+        }
+
+        .other-links {
+            margin-top: 20px;
+        }
+
+        .other-links a {
+            display: block;
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <h2>Forgot Password</h2>
+    <form action="/forgot-password" class="form-class" method="post">
+        <div>
+            <input type="email" id="email" placeholder="Enter Email" name="email" required>
+        </div>
+        
+        <button type="submit">Submit</button>
+
+        <div class="other-links">
+            <a href="/login">Back to Login</a>
+            <a href="/register">Don't have an account? Register here</a>
+        </div>
+    </form>
+</body>
+</html>
